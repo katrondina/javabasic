@@ -1,7 +1,31 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.IOException;
+import java.util.List;
+//import java.util.*;
 public class Main{
     public static void main(String[] arg){
+        //reading from external file
+        Path path = Paths.get("D:\\RETOOL\\VSC\\javabasic" , "data.txt");
+        Charset charset = Charset.forName("ISO-8859-1");
+        try{
+            List<String> lines = Files.readAllLines(path,charset);
+            //or we write it back to data.txt
+            String result = "";
+            for(String line : lines){
+                System.out.println(line); //this is for printing in console
+                result += line.toLowerCase() + "\n";
+            }
+            Files.write(path, result.getBytes()); //this is how you'll write in a file
+        } catch (IOException e){
+            System.out.println(e);
+        }
+
+
         System.out.println("Hello World, this is Katzi");
         Scanner scan = new Scanner(System.in);
         int x = scan.nextInt();
